@@ -1,0 +1,65 @@
+' Gambas class file
+
+Public c As Integer 'color usado
+Public xx As Integer
+Public yy As Integer
+
+Public Sub Azul_Click()
+
+  c = Color.Blue
+  Label1.Background = &H8017C0C0&
+  Me.Refresh()
+
+End
+
+Public Sub Rojo_Click()
+
+  c = Color.Red
+  Label1.Background = &H80C02F53&
+  Me.Refresh()
+
+End
+
+Public Sub Verde_Click()
+
+  C = Color.Green
+  Label1.Background = &H802FC02F&
+  Me.Refresh()
+
+End
+
+Public Sub Form_Open()
+
+  settings.Read(Me)
+
+  Select Case Settings["c", Color.Blue]
+    Case Color.Green
+      Verde_Click()
+    Case Color.Blue
+      Azul_Click
+    Case Color.Red
+      Rojo_Click()
+  End Select
+
+End
+
+Public Sub Form_Close()
+
+  Settings.Write(Me)
+  Settings["c"] = c
+
+End
+
+Public Sub label1_MouseDown()
+
+  xx = Mouse.x
+  yy = Mouse.y
+
+End
+
+Public Sub Label1_MouseMove()
+
+  Me.X = Mouse.ScreenX - xx
+  Me.y = Mouse.ScreenY - yy
+
+End

@@ -1,0 +1,17 @@
+# Gambas Action File 3.0
+
+{ Actions
+  { Action azul
+    Text = "Azul"
+    Shortcut = ""
+  }
+  { Action rojo
+    Text = "Rojo"
+    Shortcut = ""
+  }
+  { Action verde
+    Text = "Verde"
+    Shortcut = ""
+  }
+}
+

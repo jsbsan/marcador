@@ -1,0 +1,47 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Icon = Picture["marcador.png"]
+  Transparent = True
+  Arrangement = Arrange.Fill
+  { MenuColores Menu
+    Text = ("Menu1")
+    Visible = False
+    { Azul Menu
+      Action = "azul"
+      Text = ("Azul")
+    }
+    { Rojo Menu
+      Action = "rojo"
+      Text = ("Rojo")
+    }
+    { Verde Menu
+      Action = "verde"
+      Text = ("Verde")
+    }
+  }
+  { Label1 Label
+    MoveScaled(27,7,25,40)
+    Background = &H802FC02F&
+    PopupMenu = "MenuColores"
+    Border = Border.Raised
+  }
+}
+
+# Gambas Action File 3.0
+
+{ Actions
+  { Action azul
+    Text = "Azul"
+    Shortcut = ""
+  }
+  { Action rojo
+    Text = "Rojo"
+    Shortcut = ""
+  }
+  { Action verde
+    Text = "Verde"
+    Shortcut = ""
+  }
+}
