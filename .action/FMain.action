@@ -4,14 +4,17 @@
   { Action azul
     Text = "Azul"
     Shortcut = ""
+    Picture = "azul.png"
   }
   { Action rojo
     Text = "Rojo"
     Shortcut = ""
+    Picture = "rojo.png"
   }
   { Action verde
     Text = "Verde"
     Shortcut = ""
+    Picture = "verde.png"
   }
 }
 

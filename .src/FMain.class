@@ -4,8 +4,21 @@ Public c As Integer 'color usado
 Public xx As Integer
 Public yy As Integer
 
+Public MODOICONO As Boolean = True
+Public FechaImagen As String = "04ROJO.png"
+Public GIRO As Integer = 0
+
+Public ancho As Integer
+Public alto As Integer
+
 Public Sub Azul_Click()
 
+  Me.W = ancho
+  Me.h = alto
+
+  Me.Border = True
+  Label1.Visible = True
+  MODOICONO = False
   c = Color.Blue
   Label1.Background = &H8017C0C0&
   Me.Refresh()
@@ -14,6 +27,13 @@ End
 
 Public Sub Rojo_Click()
 
+  Me.Border = True
+
+  Me.W = ancho
+  Me.h = alto
+
+  Label1.Visible = True
+  MODOICONO = False
   c = Color.Red
   Label1.Background = &H80C02F53&
   Me.Refresh()
@@ -22,6 +42,12 @@ End
 
 Public Sub Verde_Click()
 
+  Me.Border = True
+
+  Me.W = ancho
+  Me.h = alto
+  Label1.Visible = True
+  MODOICONO = False
   C = Color.Green
   Label1.Background = &H802FC02F&
   Me.Refresh()
@@ -30,23 +56,53 @@ End
 
 Public Sub Form_Open()
 
-  settings.Read(Me)
+  MODOICONO = Settings["MODOICONO", False]
+  GIRO = Settings["giro", 0]
+  FechaImagen = Settings["FechaImagen"]
+  Me.x = Settings["x", 0]
+  Me.y = Settings["y", 0]
 
-  Select Case Settings["c", Color.Blue]
-    Case Color.Green
-      Verde_Click()
-    Case Color.Blue
-      Azul_Click
-    Case Color.Red
-      Rojo_Click()
-  End Select
+  If modoicono Then
+    Label1.Visible = False
+    DrawingArea1.Refresh()
+    ancho = Settings["ancho", 300]
+    alto = Settings["alto", 100]
+  Else
+
+    Me.W = Settings["ancho", 300]
+    Me.H = Settings["alto", 100]
+
+    ancho = Settings["ancho", 300]
+    alto = Settings["alto", 100]
+
+    Select Case Settings["c", Color.Blue]
+      Case Color.Green
+        Verde_Click()
+      Case Color.Blue
+        Azul_Click
+      Case Color.Red
+        Rojo_Click()
+    End Select
+  Endif
 
 End
 
 Public Sub Form_Close()
 
-  Settings.Write(Me)
+  If MODOICONO = False Then
+    Settings["alto"] = Me.h
+    Settings["ancho"] = Me.w
+
+  Endif
+
+  Settings["MODOICONO"] = modoicono
+  Settings["giro"] = GIRO
+  Settings["FechaImagen"] = FechaImagen
+
   Settings["c"] = c
+
+  Settings["x"] = Me.x
+  Settings["y"] = Me.y
 
 End
 
@@ -61,5 +117,130 @@ Public Sub Label1_MouseMove()
 
   Me.X = Mouse.ScreenX - xx
   Me.y = Mouse.ScreenY - yy
+
+End
+
+'DIBUJAR ICONO
+
+Public Sub DrawingArea1_Draw()
+
+  If MODOICONO Then
+    DIBUJAR()
+    Me.Border = False
+  Endif
+
+End
+
+Public Sub DIBUJAR()
+
+  Dim X, Y, W, H As Float
+  Dim hBrush As PaintBrush
+  Dim hImage As Image
+  Dim largo As Integer = 150
+
+  If FechaImagen = "" Then FechaImagen = "04ROJO.png"
+  hImage = Image.Load(FechaImagen)
+  hBrush = Paint.Image(hImage)
+
+  hBrush.Translate(largo / 2, largo / 2)
+
+  hBrush.Rotate(GIRO * Pi / 180)
+
+  hBrush.Translate(-largo / 2, -largo / 2)
+
+  ' hBrush.Scale(W / hImage.W / 2, H / hImage.H / 2)
+  Paint.Brush = hBrush
+  Paint.Rectangle(5, 5, largo, largo)
+
+  ' hBrush.Translate(50, 50)
+
+  Paint.Fill
+  Paint.Stroke
+  Me.W = largo - 20
+  Me.h = largo - 20
+
+End
+
+Public Sub MenuIconoVerde_Click()
+
+  MODOICONO = True
+  Label1.Visible = False
+  FechaImagen = "01VERDE.png"
+  DrawingArea1.Refresh()
+
+End
+
+Public Sub GuardarDimensiones(modo As Boolean)
+
+  If MODOICONO = False Then
+    Settings["ancho"] = Me.W
+    Settings["alto"] = Me.H
+  Endif
+
+End
+
+Public Sub MenuIconoAmarillo_Click()
+
+  GuardarDimensiones(modoicono)
+
+  MODOICONO = True
+  Label1.Visible = False
+  FechaImagen = "02AMARILLO.png"
+  DrawingArea1.Refresh()
+
+End
+
+Public Sub MenuIconoAzul_Click()
+
+  GuardarDimensiones(modoicono)
+  MODOICONO = True
+  Label1.Visible = False
+  FechaImagen = "03AZUL.png"
+  DrawingArea1.Refresh()
+
+End
+
+Public Sub MenuIconoRojo_Click()
+
+  GuardarDimensiones(modoicono)
+  MODOICONO = True
+  Label1.Visible = False
+  FechaImagen = "04ROJO.png"
+  DrawingArea1.Refresh()
+
+End
+
+Public Sub Form_MouseWheel()
+
+  Print Mouse.DELTA
+
+  If Mouse.DELTA = 1 Then
+    GIRO += 45 / 2
+  Else
+    GIRO -= 45 / 2
+
+  Endif
+
+  DrawingArea1.Refresh()
+
+End
+
+Public Sub DrawingArea1_MouseMove()
+
+  Me.X = Mouse.ScreenX - xx
+  Me.y = Mouse.ScreenY - yy
+
+End
+
+Public Sub DrawingArea1_MouseDown()
+
+  xx = Mouse.x
+  yy = Mouse.y
+
+End
+
+Public Sub MenuSalir_Click()
+
+  Me.Close()
 
 End

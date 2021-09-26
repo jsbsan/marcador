@@ -1,28 +1,65 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,64,64)
+  MoveScaled(0,0,114,44)
   Icon = Picture["marcador.png"]
   Transparent = True
   Arrangement = Arrange.Fill
   { MenuColores Menu
     Text = ("Menu1")
     Visible = False
-    { Azul Menu
-      Action = "azul"
-      Text = ("Azul")
+    { Menu1 Menu
+      Text = ("Marcador")
+      Picture = Picture["marcador.png"]
+      { Azul Menu
+        Action = "azul"
+        Text = ("Azul")
+        Picture = Picture["azul.png"]
+      }
+      { Rojo Menu
+        Action = "rojo"
+        Text = ("Rojo")
+        Picture = Picture["rojo.png"]
+      }
+      { Verde Menu
+        Action = "verde"
+        Text = ("Verde")
+        Picture = Picture["verde.png"]
+      }
     }
-    { Rojo Menu
-      Action = "rojo"
-      Text = ("Rojo")
+    { ICONO Menu
+      Text = ("ICONO")
+      Picture = Picture["icon:/22/color-picker"]
+      { MenuIconoVerde Menu
+        Text = ("icono")
+        Picture = Picture["01VERDE.png"]
+      }
+      { MenuIconoAmarillo Menu
+        Text = ("icono")
+        Picture = Picture["02AMARILLO.png"]
+      }
+      { MenuIconoAzul Menu
+        Text = ("icono")
+        Picture = Picture["03AZUL.png"]
+      }
+      { MenuIconoRojo Menu
+        Text = ("icono")
+        Picture = Picture["04ROJO.png"]
+      }
     }
-    { Verde Menu
-      Action = "verde"
-      Text = ("Verde")
+    { Menu2 Menu
+    }
+    { MenuSalir Menu
+      Text = ("Salir")
+      Picture = Picture["icon:/22/quit"]
     }
   }
+  { DrawingArea1 DrawingArea
+    MoveScaled(41,5,25,14)
+    PopupMenu = "MenuColores"
+  }
   { Label1 Label
-    MoveScaled(27,7,25,40)
+    MoveScaled(11,0,25,40)
     Background = &H802FC02F&
     PopupMenu = "MenuColores"
     Border = Border.Raised
@@ -35,13 +72,16 @@
   { Action azul
     Text = "Azul"
     Shortcut = ""
+    Picture = "azul.png"
   }
   { Action rojo
     Text = "Rojo"
     Shortcut = ""
+    Picture = "rojo.png"
   }
   { Action verde
     Text = "Verde"
     Shortcut = ""
+    Picture = "verde.png"
   }
 }
