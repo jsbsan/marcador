@@ -3,6 +3,7 @@
 { Form Form
   MoveScaled(0,0,114,44)
   Icon = Picture["marcador.png"]
+  Stacking = Window.Above
   Transparent = True
   Arrangement = Arrange.Fill
   { MenuColores Menu
