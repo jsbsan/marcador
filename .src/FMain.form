@@ -2,7 +2,9 @@
 
 { Form Form
   MoveScaled(0,0,114,44)
+  Foreground = Color.Transparent
   Icon = Picture["marcador.png"]
+  Border = False
   Stacking = Window.Above
   Transparent = True
   Arrangement = Arrange.Fill
@@ -57,11 +59,14 @@
   }
   { DrawingArea1 DrawingArea
     MoveScaled(41,5,25,14)
+    Background = Color.Transparent
+    Foreground = Color.Transparent
     PopupMenu = "MenuColores"
   }
   { Label1 Label
     MoveScaled(11,0,25,40)
     Background = &H802FC02F&
+    Foreground = Color.Transparent
     PopupMenu = "MenuColores"
     Border = Border.Raised
   }
