@@ -2,7 +2,7 @@
 Title=marcador
 Startup=FMain
 Icon=marcador.png
-Version=0.0.3
+Version=0.0.4
 Component=gb.image
 Component=gb.gui.qt
 Component=gb.form
@@ -16,7 +16,7 @@ Maintainer=jsbsan
 Address=jusabejusabe@gmail.com
 Url=https://jsbsan.blogspot.com/
 License=General Public License
-PackageName=marcador-0.0.3
+PackageName=marcador-0.0.4
 CreateEachDirectory=1
 Packager=1
 Systems=debian

@@ -244,3 +244,9 @@ Public Sub MenuSalir_Click()
   Me.Close()
 
 End
+
+Public Sub Form_Resize()
+
+  Me.Title = Str$(Me.w) & " x " & Str$(Me.H)
+
+End
